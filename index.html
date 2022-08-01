@@ -79,6 +79,12 @@
 
         <!-- BEGIN TIKTOK PIXEL EVENT FUNCTIONS SCRIPT SECTION -->
         <script>
+		
+		// GTM - START
+		// Initialize the data layer as an array or if there is an existing data layer, use it
+		window.dataLayer = window.dataLayer || [];		
+		// GTM - END
+		
         	// BEGIN DO NOT EDIT SECTION 
         	completeRegistration();
         	// END DO NOT EDIT SECTION 
@@ -110,6 +116,18 @@
         		console.log("productId:" + " " + productId);
         		// END HINT: UTILIZE THESE VARIABLES WHEN CONSTRUCTING YOUR CORRESPONDING TIKTOK PIXEL EVENTS 
 
+			// GTM - START
+			window.dataLayer.push({
+			   'content_id': productId,
+			   'content_type': 'product',
+			   'content_name' : 'Kids',
+			   'price': price,
+			   'quantity': 1,
+			   'currency': 'AUD',
+			   'value': price
+			});
+			// GTM - END
+			
         		// BEGIN DO NOT EDIT SECTION 
         		if (title == "Product 1") {
         			document.getElementById("add-to-cart-button-1").disabled = 'true';
