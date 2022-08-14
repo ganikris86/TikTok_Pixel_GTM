@@ -191,6 +191,36 @@
         	// HINT: This is the dedicated function for Complete Payment
         	function completePayment() {
 
+			  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			  dataLayer.push({
+			    'event': 'checkout',
+			    'ecommerce': {
+			      'checkout': {
+				'products': [{
+				  'name': 'Product 1',
+				  'id': '5678AB',
+				  'category': 'Kids',
+				  'quantity': 1,
+				  'price': '29.99'
+			       	},
+				{
+				  'name': 'Product 2',
+				  'id': '6521FJ',
+				  'category': 'Kids',
+				  'quantity': 1,
+				  'price': '49.99'
+			       	}	    
+				],
+				value: 279.97,
+				currency: 'AUD'
+			     }
+			   },
+			   'eventCallback': function() {
+			      document.location = 'checkout.html';
+			   }
+			  });
+			       
+			
         		// BEGIN DO NOT EDIT SECTION 
         		alert("Payment Completed - Purchase Successful")
         		// END DO NOT EDIT SECTION 
