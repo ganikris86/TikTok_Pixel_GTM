@@ -191,8 +191,8 @@
         	// HINT: This is the dedicated function for Complete Payment
         	function completePayment() {
 
-			  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-			  dataLayer.push({
+			  window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			  window.dataLayer.push({
 			    'event': 'checkout',
 			    'ecommerce': {
 			      'checkout': {
