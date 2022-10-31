@@ -71,7 +71,7 @@
 
         <button class="checkout" onclick="initiateCheckout()">Initiate Checkout</button>
 		
-	<input id="nextBtn" aria-label="Schedule It" class="button primary" onclick="return false;" type="submit" formnovalidate="" data-tt-prevvalue="Schedule It" value="Schedule It">	
+	<input id="nextBtn" aria-label="Schedule It" class="button primary" onclick="testRedirect();" type="submit" formnovalidate="" data-tt-prevvalue="Schedule It" value="Schedule It">	
 
         <footer>
 
@@ -81,6 +81,10 @@
 
         <!-- BEGIN TIKTOK PIXEL EVENT FUNCTIONS SCRIPT SECTION -->
         <script>
+		
+		function testRedirect() {
+		    window.location = "https://ui.timetrade.com.au/app/hrau/workflows/HRAU001/schedule/confirm";	
+		}
 		
 		// GTM - START
 		// Initialize the data layer as an array or if there is an existing data layer, use it
