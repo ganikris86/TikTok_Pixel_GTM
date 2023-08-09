@@ -177,17 +177,33 @@
         		// END HINT: UTILIZE THESE VARIABLES WHEN CONSTRUCTING YOUR CORRESPONDING TIKTOK PIXEL EVENT
 
 			// GTM - START
-			gtag("event", "view_item", {
-			  currency: "AUD",
-			  value: price,
-			  items: [
+			//gtag("event", "view_item", {
+			//  currency: "AUD",
+			//  value: price,
+			//  items: [
+			//    {
+			//      item_id: productId,
+			//      item_name: title,
+			//      price: price,
+			//      quantity: 1
+			//    }
+			//  ]
+			//});
+			dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			dataLayer.push({
+			  event: "view_item",
+			  ecommerce: {
+			    currency: "AUD",
+			    value: price,
+			    items: [
 			    {
 			      item_id: productId,
 			      item_name: title,
 			      price: price,
 			      quantity: 1
 			    }
-			  ]
+			    ]
+			  }
 			});
 			// GTM - END
 			
