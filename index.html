@@ -71,7 +71,7 @@
 
         <button class="checkout" onclick="initiateCheckout()">Initiate Checkout</button>
 		
-	<input id="nextBtn" aria-label="Schedule It" class="button primary" onclick="testRedirect();" type="submit" formnovalidate="" data-tt-prevvalue="Schedule It" value="Schedule It">	
+	<input id="nextBtn" aria-label="Buy" class="button primary" onclick="completePayment('Product 3','4098MD',199.99);" type="submit" formnovalidate="" data-tt-prevvalue="Buy" value="Buy">	
 
         <footer>
 
@@ -123,17 +123,17 @@
         		// END HINT: UTILIZE THESE VARIABLES WHEN CONSTRUCTING YOUR CORRESPONDING TIKTOK PIXEL EVENTS 
 
 			// GTM - START
-			window.dataLayer.push({
-			   'event': 'AddToCart',	
-			   'content_id': productId,
-			   'content_type': 'product',
-			   'content_name' : 'Kids',
-			   'price': price,
-			   'quantity': 1,
-			   'currency': 'AUD',
-			   'value': price,
-			   'sha256_email': '0c7e6a405862e402eb76a70f8a26fc732d07c32931e9fae9ab1582911d2e8a3b', 
-			   'sha256_phone_number': '9f7ec22d72092cd3c0b58726ed9c2d91b92e51a3f29837508fb2948bb22dd2fd'
+			gtag("event", "add_to_cart", {
+			  currency: "AUD",
+			  value: price,
+			  items: [
+			    {
+			      item_id: productId,
+			      item_name: title,
+			      price: price,
+			      quantity: 1
+			    }
+			  ]
 			});
 			// GTM - END
 			
@@ -166,15 +166,17 @@
         		// END HINT: UTILIZE THESE VARIABLES WHEN CONSTRUCTING YOUR CORRESPONDING TIKTOK PIXEL EVENT
 
 			// GTM - START
-			window.dataLayer.push({
-			   'event': 'ViewContent',	
-			   'content_id': productId,
-			   'content_type': 'product',
-			   'content_name' : title,
-			   'price': price,
-			   'quantity': 1,
-			   'currency': 'AUD',
-			   'value': price
+			gtag("event", "view_item", {
+			  currency: "AUD",
+			  value: price,
+			  items: [
+			    {
+			      item_id: productId,
+			      item_name: title,
+			      price: price,
+			      quantity: 1
+			    }
+			  ]
 			});
 			// GTM - END
 			
@@ -194,35 +196,48 @@
         	}
 
         	function initiateCheckout() {
-        		var retVal = confirm("This is a pop up meant to be a mock initiate checkout step - clicking OK will assume that the correct payment information was entered by the customer. Purchase will then complete successfully. HINT: Clicking Cancel should not trigger any events");
 
-        		if (retVal === true) { 
+        	    // BEGIN DO NOT EDIT SECTION 
+        	    alert("Checkout Details Popup: " 
+        	    	+ "\n" + "title: " + title 
+        	    	+ "\n" + "price: " + price 
+        	    	+ "\n" + "productId: " +  productId)
+        	    // END DO NOT EDIT SECTION 
 
-                // BEGIN DO NOT EDIT SECTION 
-        		   completePayment();
-        		} else {	
-        		   alert("Payment step cancelled!");
-                   return false;    
-        		}
-        		// END DO NOT EDIT SECTION 
+			// GTM - START
+			gtag("event", "begin_checkout", {
+			  currency: "AUD",
+			  value: price,
+			  coupon: "SUMMER_FUN",
+			  items: [
+			    {
+			      item_id: productId,
+			      item_name: title,
+			      price: price,
+			      quantity: 1
+			    }
+			  ]
+			});
+			// GTM - END
+			
         	}
 
         	// HINT: This is the dedicated function for Complete Payment
         	function completePayment() {
 
 			// GTM - START
-			  window.dataLayer.push({
-			   'event': 'CompletePayment',
-			   'content_id': '5678AB',
-			   'content_type': 'product',
-			   'content_name' : 'Kids',
-			   'price': '29.99',
-			   'quantity': 1,
-			   'currency': 'AUD',
-			   'value': '29.99',
-			   'sha256_email': '0c7e6a405862e402eb76a70f8a26fc732d07c32931e9fae9ab1582911d2e8a3b', 
-			   'sha256_phone_number': '9f7ec22d72092cd3c0b58726ed9c2d91b92e51a3f29837508fb2948bb22dd2fd'
-			  });
+			gtag("event", "purchase", {
+			    transaction_id: Math.floor(Math.random() * 1000000000000) + 1,
+			    value: price,
+			    currency: "AUD",
+			    items: [
+			     {
+			      item_id: productId,
+			      item_name: title,
+			      price: price,
+			      quantity: 1
+			    }]
+			});
 			// GTM - END			       
 			
         		// BEGIN DO NOT EDIT SECTION 
