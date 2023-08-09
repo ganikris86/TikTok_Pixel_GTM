@@ -80,7 +80,7 @@
          	</tr>
         </table>
 
-        <button class="checkout" onclick="initiateCheckout()">Initiate Checkout</button>
+        <button class="checkout" onclick="initiateCheckout('Product 1','5678AB',29.99)">Initiate Checkout</button>
 		
 	<input id="nextBtn" aria-label="Buy" class="button primary" onclick="completePayment('Product 3','4098MD',199.99);" type="submit" formnovalidate="" data-tt-prevvalue="Buy" value="Buy">	
 
@@ -206,7 +206,7 @@
         	    // END DO NOT EDIT SECTION 
         	}
 
-        	function initiateCheckout() {
+        	function initiateCheckout(title, productId, price) {
 
         	    // BEGIN DO NOT EDIT SECTION 
         	    alert("Checkout Details Popup: " 
