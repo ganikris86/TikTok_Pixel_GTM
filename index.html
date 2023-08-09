@@ -134,17 +134,20 @@
         		// END HINT: UTILIZE THESE VARIABLES WHEN CONSTRUCTING YOUR CORRESPONDING TIKTOK PIXEL EVENTS 
 
 			// GTM - START
-			gtag("event", "add_to_cart", {
-			  currency: "AUD",
-			  value: price,
-			  items: [
+			dataLayer.push({
+			  event: "add_to_cart",
+			  ecommerce: {
+			    currency: "AUD",
+			    value: price,
+			    items: [
 			    {
 			      item_id: productId,
 			      item_name: title,
 			      price: price,
 			      quantity: 1
 			    }
-			  ]
+			    ]
+			  }
 			});
 			// GTM - END
 			
@@ -232,18 +235,21 @@
         	    // END DO NOT EDIT SECTION 
 
 			// GTM - START
-			gtag("event", "begin_checkout", {
-			  currency: "AUD",
-			  value: price,
-			  coupon: "SUMMER_FUN",
-			  items: [
+			dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			dataLayer.push({
+			  event: "begin_checkout",
+			  ecommerce: {
+			    currency: "AUD",
+			    value: price,
+			    items: [
 			    {
 			      item_id: productId,
 			      item_name: title,
 			      price: price,
 			      quantity: 1
 			    }
-			  ]
+			    ]
+			  }
 			});
 			// GTM - END
 			
@@ -253,17 +259,22 @@
         	function completePayment() {
 
 			// GTM - START
-			gtag("event", "purchase", {
+			dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			dataLayer.push({
+			  event: "purchase",
+			  ecommerce: {
 			    transaction_id: Math.floor(Math.random() * 1000000000000) + 1,
-			    value: price,
 			    currency: "AUD",
+			    value: price,
 			    items: [
-			     {
+			    {
 			      item_id: productId,
 			      item_name: title,
 			      price: price,
 			      quantity: 1
-			    }]
+			    }
+			    ]
+			  }
 			});
 			// GTM - END			       
 			
